@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Administração de Atendentes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; }
+    .container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 32px; }
+    h2 { color: #2a7ae2; }
+    table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+    th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
+    th { background: #f0f4fa; }
+    tr:hover { background: #f9f9f9; }
+    .btn { background: #2a7ae2; color: #fff; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; }
+    .btn:hover { background: #185a9d; }
+    form.inline { display: inline; }
+    @media (max-width: 600px) {
+      .container { max-width: 98vw; padding: 1rem 0.5rem; }
+      table, th, td { font-size: 0.98rem; }
+      h2 { font-size: 1.2rem; }
+      .btn { padding: 6px 8px; font-size: 0.98rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Administração de Atendentes</h2>
+    <form method="post" action="/admin/atendentes/add" style="margin-bottom: 24px;">
+      <input type="text" name="nome" placeholder="Nome" required>
+      <input type="text" name="login" placeholder="Login" required>
+      <input type="password" name="senha" placeholder="Senha" required>
+      <button class="btn" type="submit">Adicionar</button>
+    </form>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Login</th>
+        <th>Acesso</th>
+        <th>Ações</th>
+      </tr>
+      {% for a in atendentes %}
+      <tr>
+        <td>{{ a.id }}</td>
+        <td>{{ a.nome }}</td>
+        <td>{{ a.login }}</td>
+        <td>
+          <form class="inline" method="post" action="/admin/atendentes/acesso/{{ a.id }}">
+            <select name="acesso" onchange="this.form.submit()">
+              <option value="atendente" {% if a.acesso == 'atendente' %}selected{% endif %}>Atendente</option>
+              <option value="gerente" {% if a.acesso == 'gerente' %}selected{% endif %}>Gerente</option>
+            </select>
+          </form>
+        </td>
+        <td>
+          <form class="inline" method="post" action="/admin/atendentes/delete/{{ a.id }}">
+            <button class="btn" type="submit" onclick="return confirm('Excluir atendente?')">Excluir</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a class="btn" href="/dashboard" style="margin-top:16px;">← Voltar</a>
+  </div>
+</body>
+</html>

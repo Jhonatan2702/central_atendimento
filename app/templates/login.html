@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #efefef;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    .form {
+      --bg-light: #efefef;
+      --bg-dark: #707070;
+      --clr: #58bc82;
+      --clr-alpha: #9c9c9c60;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 340px;
+      background: #fff;
+      padding: 2rem 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 2px 16px #0001;
+      box-sizing: border-box;
+    }
+    .form .input-span {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .form input[type="text"],
+    .form input[type="password"] {
+      border-radius: 0.5rem;
+      padding: 1rem 0.75rem;
+      width: 100%;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--clr-alpha);
+      outline: 2px solid var(--bg-dark);
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .form input[type="text"]:focus,
+    .form input[type="password"]:focus {
+      outline: 2px solid var(--clr);
+    }
+    .label {
+      align-self: flex-start;
+      color: var(--clr);
+      font-weight: 600;
+    }
+    .form .submit {
+      padding: 1rem 0.75rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 3rem;
+      background-color: var(--bg-dark);
+      color: var(--bg-light);
+      border: none;
+      cursor: pointer;
+      transition: all 300ms;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .form .submit:hover {
+      background-color: var(--clr);
+      color: var(--bg-dark);
+    }
+    .span {
+      text-decoration: none;
+      color: var(--bg-dark);
+      font-size: 0.95rem;
+    }
+    .span a {
+      color: var(--clr);
+      text-decoration: none;
+    }
+    @media (max-width: 480px) {
+      .form {
+        max-width: 98vw;
+        padding: 1.2rem 0.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 6px #0001;
+      }
+      .form input[type="text"],
+      .form input[type="password"] {
+        padding: 0.8rem 0.5rem;
+        font-size: 0.98rem;
+      }
+      .form .submit {
+        padding: 0.8rem 0.5rem;
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <form class="form" method="post" action="/login">
+    <span class="input-span">
+      <label for="login" class="label">Login</label>
+      <input type="text" name="login" id="login" required />
+    </span>
+    <span class="input-span">
+      <label for="senha" class="label">Senha</label>
+      <input type="password" name="senha" id="senha" required />
+    </span>
+    <span class="span"><a href="#">Esqueceu a senha?</a></span>
+    <input class="submit" type="submit" value="Entrar" />
+    <!-- <span class="span">Não tem uma conta? <a href="#">Cadastre-se</a></span> -->
+  </form>
+</body>
+</html>
